@@ -10,26 +10,28 @@ class Albert {
   
   void drawAlbert() {
     //implement draw albert function once we have image for him
+    fill(255);
+    rect(xpos, ypos, 30, 30); // Placeholder
   }
   
   void moveLeft() {
     if (xpos != 0) {
-      xpos -= 1;
+      xpos -= 30;
     }
   }
   void moveRight() {
     if (xpos != w) {
-      xpos += 1;
+      xpos += 30;
     }
   }
   void moveDown() {
     if (ypos != h) {
-      ypos += 1;
+      ypos += 30;
     }
   }
   void moveUp() {
     if (ypos != 0) {
-      ypos -= 1;
+      ypos -= 30;
     }
   }
 }
