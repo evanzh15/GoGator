@@ -6,13 +6,18 @@ enum State {
 }
  
 State state;
+Collectables collectables;
 Albert albert;
+int savedTime;
+int totalTime = 3000;
 
 void setup() {
   size(600, 600);
   rectMode(CENTER);
   textAlign(CENTER);
+  savedTime = millis();
   
+  collectables = new Collectables();
   // GoGator initialized at MAIN_MENU state
   state = State.MAIN_MENU;
 }
@@ -45,6 +50,7 @@ void draw() {
     textSize(20);
     text("Press TAB to pause.", 300, 20);
     popMatrix();
+    collectables.drawCollectables();
     
     // Yellow box of death at the top right corner invokes the DEATH state.
     if((int)albert.getX() == 570 && (int)albert.getY() == 0) {
