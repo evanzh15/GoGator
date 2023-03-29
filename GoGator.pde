@@ -11,9 +11,7 @@ Albert albert;
 void setup() {
   size(600, 600);
   rectMode(CENTER);
-  
-  // Albert initialized at center of screen
-  albert =  new Albert(width/2, height/2, width, height);
+  textAlign(CENTER);
   
   // GoGator initialized at MAIN_MENU state
   state = State.MAIN_MENU;
@@ -28,7 +26,6 @@ void draw() {
     fill(255);
     rect(200, 400, 200, 50);
     rect(200, 500, 200, 50);
-    textAlign(CENTER);
     textSize(100);
     text("GoGator!", 300, 200);
     fill(0);
@@ -36,21 +33,43 @@ void draw() {
     text("START", 300, 440);
     text("EXIT", 300, 540);
     popMatrix();
+    // Albert initialized at center of screen
+    albert = new Albert(width/2, height/2, width, height);
   } else if(state == State.GAME) {
     albert.drawAlbert();
+    pushMatrix();
+    fill(255, 255, 0);
+    rect(600, 0, 30, 30);
+    fill(255, 0, 0);
+    textSize(20);
+    text("Press TAB to pause.", 300, 20);
+    popMatrix();
+    
+    // Yellow box of death at the top right corner invokes the DEATH state.
+    if((int)albert.getX() == 600 && (int)albert.getY() == 0) {
+      state = State.DEATH;
+    }
   } else if(state == State.ESCAPE_MENU) {
     pushMatrix(); //<>//
     rectMode(CORNER);
     fill(255);
     rect(200, 400, 200, 50);
     rect(200, 500, 200, 50);
-    textAlign(CENTER);
     textSize(100);
     text("PAUSED.", 300, 200);
     fill(0);
     textSize(40);
     text("RESUME", 300, 440);
     text("MAIN MENU", 300, 540);
+    popMatrix();
+  } else if(state == State.DEATH) {
+    pushMatrix();
+    rectMode(CORNER);
+    fill(255);
+    textSize(100);
+    text("ALBERT DIED.", 300, 300);
+    textSize(20);
+    text("Press any key to continue.", 300, 580);
     popMatrix();
   }
 }
@@ -91,5 +110,7 @@ void keyPressed() {
       if(key == TAB)
         state = State.ESCAPE_MENU;
     }
+  } else if(state == State.DEATH) {
+    state = State.MAIN_MENU;
   }
 }
