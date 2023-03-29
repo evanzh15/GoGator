@@ -47,7 +47,11 @@ void draw() {
     fill(255, 255, 0);
     rect(570, 0, 30, 30);
     fill(255, 0, 0);
+    textAlign(LEFT);
+    textSize(30);
+    text(collectables.getPtsAccrued(), 10, 30);
     textSize(20);
+    textAlign(CENTER);
     text("Press TAB to pause.", 300, 20);
     popMatrix();
     collectables.drawCollectables();

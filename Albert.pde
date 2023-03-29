@@ -1,7 +1,7 @@
 class Albert {
-  float xpos, ypos;
+  int xpos, ypos;
   float w, h;
-  Albert(float xpos, float ypos, float w, float h) {
+  Albert(int xpos, int ypos, float w, float h) {
     this.xpos = xpos;
     this.ypos = ypos;
     this.w = w;
@@ -38,10 +38,10 @@ class Albert {
     }
     print(xpos, ypos, '\n');
   }
-  float getX() {
+  int getX() {
     return xpos;
   }
-  float getY() {
+  int getY() {
     return ypos;
   }
 }
