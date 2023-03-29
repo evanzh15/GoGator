@@ -38,15 +38,16 @@ void draw() {
   } else if(state == State.GAME) {
     albert.drawAlbert();
     pushMatrix();
+    rectMode(CORNER);
     fill(255, 255, 0);
-    rect(600, 0, 30, 30);
+    rect(570, 0, 30, 30);
     fill(255, 0, 0);
     textSize(20);
     text("Press TAB to pause.", 300, 20);
     popMatrix();
     
     // Yellow box of death at the top right corner invokes the DEATH state.
-    if((int)albert.getX() == 600 && (int)albert.getY() == 0) {
+    if((int)albert.getX() == 570 && (int)albert.getY() == 0) {
       state = State.DEATH;
     }
   } else if(state == State.ESCAPE_MENU) {
