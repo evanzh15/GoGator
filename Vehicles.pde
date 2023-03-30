@@ -3,10 +3,10 @@ class Vehicles {
   int timer = 0;
   int num;
   void drawVehicles() {
-    int passedTime = millis() - savedTime;
+    int passedTime = millis() - savedTime2;
     if (passedTime > totalTime) {
       addVehicle();
-      savedTime = millis();
+      savedTime2 = millis();
     }
     int check = collision(albert.getX(), albert.getY());
     if(check != -1) {
@@ -17,7 +17,9 @@ class Vehicles {
       fill(map(temp.getType(), 0, 11, 50, 255));
       rect(temp.getX(), temp.getY(), 50, 30);
       if (temp.spawnPoint == 0) {
+        
         list.get(i).xpos += temp.getSpeed();
+        println(list.get(i).xpos);
       }
       else if (temp.spawnPoint == 1) {
         list.get(i).xpos -= temp.getSpeed();

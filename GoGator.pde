@@ -10,6 +10,7 @@ Collectables collectables;
 Vehicles vehicles;
 Albert albert;
 int savedTime;
+int savedTime2;
 int totalTime = 3000;
 
 void setup() {
