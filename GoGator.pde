@@ -16,7 +16,7 @@ void setup() {
   rectMode(CENTER);
   textAlign(CENTER);
   savedTime = millis();
-  
+  frameRate(60);
   collectables = new Collectables();
   // GoGator initialized at MAIN_MENU state
   state = State.MAIN_MENU;
@@ -41,6 +41,7 @@ void draw() {
     // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);
   } else if(state == State.GAME) {
+    frameCount = 0;
     albert.drawAlbert();
     pushMatrix();
     rectMode(CORNER);
