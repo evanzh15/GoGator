@@ -7,6 +7,7 @@ enum State {
  
 State state;
 Collectables collectables;
+Vehicles vehicles;
 Albert albert;
 int savedTime;
 int totalTime = 3000;
@@ -18,6 +19,7 @@ void setup() {
   savedTime = millis();
   frameRate(60);
   collectables = new Collectables();
+  vehicles = new Vehicles();
   // GoGator initialized at MAIN_MENU state
   state = State.MAIN_MENU;
 }
@@ -41,7 +43,6 @@ void draw() {
     // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);
   } else if(state == State.GAME) {
-    frameCount = 0;
     albert.drawAlbert();
     pushMatrix();
     rectMode(CORNER);
@@ -56,7 +57,7 @@ void draw() {
     text("Press TAB to pause.", 300, 20);
     popMatrix();
     collectables.drawCollectables();
-    
+    vehicles.drawVehicles();
     // Yellow box of death at the top right corner invokes the DEATH state.
     if((int)albert.getX() == 570 && (int)albert.getY() == 0) {
       state = State.DEATH;
