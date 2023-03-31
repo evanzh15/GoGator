@@ -1,3 +1,5 @@
+int albertWidth = 120;
+int albertHeight = 120;
 class Albert {
   int xpos, ypos;
   float w, h;
@@ -19,19 +21,19 @@ class Albert {
     fill(255);
     //rect(xpos, ypos, 30, 30); // Placeholder
     if (draw == 1) {
-      albertSpriteUp.resize(90, 90);
+      albertSpriteUp.resize(albertWidth, albertHeight);
       image(albertSpriteUp, xpos, ypos);
     }
     if (draw == 2) {
-      albertSpriteDown.resize(90, 90);
+      albertSpriteDown.resize(albertWidth, albertHeight);
       image(albertSpriteDown, xpos, ypos);
     }
     if (draw == 3) {
-      albertSpriteLeft.resize(90, 90);
+      albertSpriteLeft.resize(albertWidth, albertHeight);
       image(albertSpriteLeft, xpos, ypos);
     }
     if (draw == 4) {
-      albertSpriteRight.resize(90, 90);
+      albertSpriteRight.resize(albertWidth, albertHeight);
       image(albertSpriteRight, xpos, ypos);
     }
   }

@@ -63,7 +63,7 @@ class Collectables {
       //if(temp.getX() == albertX && temp.getY() == albertY) {
       //  return temp.getID();
       //}
-      if((temp.getX() < albertX + 45 && temp.getY() < albertY + 45) && (temp.getX() + 30 > albertX - 45 && temp.getY() + 30 > albertY - 45)) {
+      if((temp.getX() < albertX + albertWidth/2 && temp.getY() < albertY + albertHeight/2) && (temp.getX() + 30 > albertX - albertWidth/2 && temp.getY() + 30 > albertY - albertHeight/2)) {
         return temp.getID();
       }
     }
