@@ -1,3 +1,11 @@
+/*
+  Team Members: 
+  Kyle McClelland
+  Milo Duty
+  Evan Zhang
+  Niloufar Saririan
+*/
+
 enum State {
   MAIN_MENU,
   GAME,
