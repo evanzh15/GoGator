@@ -48,6 +48,7 @@ void draw() {
     albert = new Albert(width/2, height/2, width, height);
   } else if(state == State.GAME) {
     background(road);
+    imageMode(CENTER);
     albert.drawAlbert();
     pushMatrix();
     rectMode(CORNER);

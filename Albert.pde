@@ -1,7 +1,7 @@
 class Albert {
   int xpos, ypos;
   float w, h;
-  PImage albertSprite = loadImage("gatorsprite.png");
+  PImage albertSprite = loadImage("gatorsprite1.png");
   Albert(int xpos, int ypos, float w, float h) {
     this.xpos = xpos;
     this.ypos = ypos;
@@ -12,8 +12,9 @@ class Albert {
   void drawAlbert() {
     //implement draw albert function once we have image for him
     fill(255);
-    rect(xpos, ypos, 30, 30); // Placeholder
-    //image(albertSprite, xpos, ypos);
+    //rect(xpos, ypos, 30, 30); // Placeholder
+    albertSprite.resize(90,90);
+    image(albertSprite, xpos, ypos);
   }
   
   void moveLeft() {

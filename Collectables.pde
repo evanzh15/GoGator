@@ -60,7 +60,10 @@ class Collectables {
   int collision(int albertX, int albertY) {
     for(int i = 0; i < items.size(); i++) {
       Collectable temp = items.get(i);
-      if(temp.getX() == albertX && temp.getY() == albertY) {
+      //if(temp.getX() == albertX && temp.getY() == albertY) {
+      //  return temp.getID();
+      //}
+      if((temp.getX() < albertX + 45 && temp.getY() < albertY + 45) && (temp.getX() + 30 > albertX - 45 && temp.getY() + 30 > albertY - 45)) {
         return temp.getID();
       }
     }
