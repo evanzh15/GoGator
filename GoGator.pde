@@ -4,7 +4,8 @@ enum State {
   ESCAPE_MENU,
   DEATH
 }
- 
+PImage bckgrnd;
+PImage road;
 State state;
 Collectables collectables;
 Vehicles vehicles;
@@ -23,11 +24,13 @@ void setup() {
   vehicles = new Vehicles();
   // GoGator initialized at MAIN_MENU state
   state = State.MAIN_MENU;
+  bckgrnd = loadImage("gogator_menu.png");
+  road = loadImage("gogator_road.png");
 }
 
 void draw() {
   // Draw everything according to game state.
-  background(0);
+  background(bckgrnd);
   if(state == State.MAIN_MENU) {
     pushMatrix();
     rectMode(CORNER);
@@ -44,6 +47,7 @@ void draw() {
     // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);
   } else if(state == State.GAME) {
+    background(road);
     albert.drawAlbert();
     pushMatrix();
     rectMode(CORNER);
@@ -64,6 +68,7 @@ void draw() {
       state = State.DEATH;
     }
   } else if(state == State.ESCAPE_MENU) {
+    background(road);
     pushMatrix(); //<>//
     rectMode(CORNER);
     fill(255);
@@ -77,6 +82,7 @@ void draw() {
     text("MAIN MENU", 300, 540);
     popMatrix();
   } else if(state == State.DEATH) {
+    background(road);
     pushMatrix();
     rectMode(CORNER);
     fill(255);
