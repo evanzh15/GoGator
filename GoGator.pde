@@ -60,8 +60,6 @@ void draw() {
     albert.drawAlbert();
     pushMatrix();
     rectMode(CORNER);
-    fill(255, 255, 0);
-    rect(570, 0, 30, 30);
     fill(255, 0, 0);
     textAlign(LEFT);
     textSize(30);
@@ -73,9 +71,7 @@ void draw() {
     collectables.drawCollectables();
     vehicles.drawVehicles();
     // Yellow box of death at the top right corner invokes the DEATH state.
-    if((int)albert.getX() == 570 && (int)albert.getY() == 0) {
-      state = State.DEATH;
-    }
+    
   } else if(state == State.ESCAPE_MENU) {
     background(road);
     pushMatrix(); //<>//
@@ -98,7 +94,7 @@ void draw() {
     textSize(100);
     text("ALBERT DIED.", 300, 300);
     textSize(20);
-    text("Press any key to continue.", 300, 580);
+    text("Press enter to continue.", 300, 580);
     popMatrix();
   }
 }
@@ -139,7 +135,7 @@ void keyPressed() {
       if(key == TAB)
         state = State.ESCAPE_MENU;
     }
-  } else if(state == State.DEATH) {
+  } else if(state == State.DEATH && keyCode == ENTER) {
     state = State.MAIN_MENU;
   }
 }
