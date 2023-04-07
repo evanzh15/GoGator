@@ -1,4 +1,4 @@
-/*
+/* //<>//
   Team Members: 
   Kyle McClelland
   Milo Duty
@@ -24,6 +24,12 @@ Albert albert;
 int savedTime;
 int savedTime2;
 int totalTime = 3000;
+PrintWriter writeE;
+PrintWriter writeH;
+BufferedReader readE;
+BufferedReader readH;
+int wCount = 0;
+int diff = 0;
 
 void setup() {
   size(600, 600);
@@ -76,6 +82,7 @@ void draw() {
     // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);
   } else if(state == State.GAME) {
+    diff = 1;
     background(road);
     imageMode(CENTER);
     albert.drawAlbert();
@@ -115,6 +122,10 @@ void draw() {
     textSize(20);
     text("Press enter to continue.", 300, 580);
     popMatrix();
+    if (wCount == 0) {
+      checkFile(diff);
+      wCount = -1;
+    }
   }
 }
 
@@ -159,4 +170,39 @@ void keyPressed() {
     state = State.MAIN_MENU;
     collectables.clear();
   }
+}
+void checkFile(int diff) {
+  int score = collectables.ptsAccrued;
+  if (diff == 1) {
+    writeE = createWriter("highscoreEasy.txt");
+    readE = createReader("highscoreEasy.txt");
+    String[] checkScores = loadStrings("highscoreEasy.txt");
+    String[] saveScores = new String[1];
+    if (checkScores.length > 0) {
+      int checkScore = int(checkScores[0]);
+      if (score > checkScore) {
+        saveScores[0] = str(score);
+        saveStrings("highscoreEasy.txt", saveScores);
+      }
+      println("Stored score: " + checkScore);
+      writeE.flush();
+      writeE.close();
+    }
+    else {
+      saveScores[0] = str(score);
+      saveStrings("highscoreEasy.txt", saveScores);
+    }
+  } 
+  else {
+    writeH = createWriter("highscoreHard.txt");
+    readH = createReader("highscoreHard.txt");
+     String[] scores = loadStrings("highscoreHard.txt");
+    if (scores.length > 0) {
+      int checkScore = int(scores[0]);
+      println("Stored score: " + checkScore);
+    }
+    writeH.flush();
+    writeH.close();
+  }
+  
 }
