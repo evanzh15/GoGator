@@ -18,12 +18,11 @@ class Collectables {
     }
     for(int i = 0; i < items.size(); i++) {
       Collectable temp = items.get(i);
-      fill(map(temp.getType(), 0, 11, 50, 255));
-      rect(temp.getX(), temp.getY(), 30, 30);
+      image(cSprites[temp.getType()], temp.getX(), temp.getY());
     }
   }
   void addCollectable() {
-    int type = (int)random(0,12);
+    int type = (int)random(0,11);
     int cPts = -1;
     //switch (type) {
     //  case 0:
@@ -40,7 +39,7 @@ class Collectables {
     //    cPts = 100;
     //    break;
     //}
-    cPts = (int)map(type, 0, 11, 50, 300);
+    cPts = (int)map(type, 0, 10, 50, 300);
     items.add(new Collectable(type, (int)random(0,20)*30, (int)random(0,20)*30, haveBeenSpawned, cPts));
     onBoard++;
     haveBeenSpawned++;
@@ -72,5 +71,12 @@ class Collectables {
   
   int getPtsAccrued() {
     return ptsAccrued;
+  }
+  
+  void clear() {
+    items.clear();
+    ptsAccrued = 0;
+    onBoard = 0;
+    haveBeenSpawned = 0;
   }
 }

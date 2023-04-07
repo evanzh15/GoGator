@@ -5,6 +5,7 @@
   Evan Zhang
   Niloufar Saririan
 */
+import java.util.Map;
 
 enum State {
   MAIN_MENU,
@@ -12,6 +13,8 @@ enum State {
   ESCAPE_MENU,
   DEATH
 }
+PImage[] cSprites = new PImage[11];
+PImage[] vSprites = new PImage[3];
 PImage bckgrnd;
 PImage road;
 State state;
@@ -34,6 +37,24 @@ void setup() {
   state = State.MAIN_MENU;
   bckgrnd = loadImage("gogator_menu.png");
   road = loadImage("gogator_road.png");
+  
+  // Instantiating collectables
+  cSprites[0] = loadImage("computersprite.png");
+  cSprites[1] = loadImage("friessprite.png");
+  cSprites[2] = loadImage("headphonesprite.png");
+  cSprites[3] = loadImage("hotdogsprite.png");
+  cSprites[4] = loadImage("hydroflasksprite.png");
+  cSprites[5] = loadImage("icecreamsprite.png");
+  cSprites[6] = loadImage("papersprite.png");
+  cSprites[7] = loadImage("pastasprite.png");
+  cSprites[8] = loadImage("phonesprite.png");
+  cSprites[9] = loadImage("pizzasprite.png");
+  cSprites[10] = loadImage("calculatorsprite.png");
+  
+  // Instantiating vehicles
+  vSprites[0] = loadImage("bluecar.png");
+  vSprites[1] = loadImage("greycar.png");
+  vSprites[2] = loadImage("bussprite.png");
 }
 
 void draw() {
@@ -70,8 +91,6 @@ void draw() {
     popMatrix();
     collectables.drawCollectables();
     vehicles.drawVehicles();
-    // Yellow box of death at the top right corner invokes the DEATH state.
-    
   } else if(state == State.ESCAPE_MENU) {
     background(road);
     pushMatrix(); //<>//
@@ -113,6 +132,7 @@ void mousePressed() {
       state = State.GAME;
     } else if(mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
       state = State.MAIN_MENU;
+      collectables.clear();
     }
   }
 }
@@ -137,5 +157,6 @@ void keyPressed() {
     }
   } else if(state == State.DEATH && keyCode == ENTER) {
     state = State.MAIN_MENU;
+    collectables.clear();
   }
 }

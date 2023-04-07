@@ -19,7 +19,8 @@ class Vehicles {
       if (temp.getX() < -20 || temp.getX() > width + 20) {
         rmVehicles(temp.getID());
       } else {
-        rect(temp.getX(), temp.getY(), 50, 30);
+        image(vSprites[temp.getType()], temp.getX(), temp.getY());
+        //rect(temp.getX(), temp.getY(), 50, 30);
         if (temp.spawnPoint == 0) {
           list.get(i).xpos += temp.getSpeed();
         } else if (temp.spawnPoint == 1) {
@@ -30,7 +31,7 @@ class Vehicles {
   }
 
   void addVehicle() {
-    int type = (int)random(0, 2);
+    int type = (int)random(0, 3);
     int spawnPoint = (int)random(0, 2);
     int lane  = (int) random(0, 3);
     float ypos = 0;
