@@ -63,6 +63,7 @@ class Collectables {
       //  return temp.getID();
       //}
       if((temp.getX() < albertX + albertWidth/2 && temp.getY() < albertY + albertHeight/2) && (temp.getX() + 30 > albertX - albertWidth/2 && temp.getY() + 30 > albertY - albertHeight/2)) {
+        sounds.playSound(sounds.sFiles[4]);
         return temp.getID();
       }
     }

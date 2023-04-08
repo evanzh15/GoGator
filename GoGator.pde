@@ -30,6 +30,7 @@ BufferedReader readE;
 BufferedReader readH;
 int wCount = 0;
 int diff = 0;
+Sounds sounds;
 
 void setup() {
   size(600, 600);
@@ -39,10 +40,13 @@ void setup() {
   frameRate(60);
   collectables = new Collectables();
   vehicles = new Vehicles();
+  
   // GoGator initialized at MAIN_MENU state
   state = State.MAIN_MENU;
   bckgrnd = loadImage("gogator_menu.png");
   road = loadImage("gogator_road.png");
+  
+  sounds = new Sounds();
   
   // Instantiating collectables
   cSprites[0] = loadImage("computersprite.png");
@@ -89,7 +93,7 @@ void draw() {
     pushMatrix();
     rectMode(CORNER);
     fill(255, 0, 0);
-    textAlign(LEFT);
+    textAlign(LEFT); //<>//
     textSize(30);
     text(collectables.getPtsAccrued(), 10, 30);
     textSize(20);
@@ -135,15 +139,18 @@ void mousePressed() {
   if(state == State.MAIN_MENU) {
     if(mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
       state = State.GAME;
+      sounds.changeState(State.MAIN_MENU, State.GAME);
     } else if(mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
       exit();
     }
   } else if(state == State.ESCAPE_MENU) {
     if(mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
       state = State.GAME;
+      sounds.changeState(State.ESCAPE_MENU, State.GAME);
     } else if(mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
       state = State.MAIN_MENU;
-      collectables.clear();
+      sounds.changeState(State.ESCAPE_MENU, State.MAIN_MENU);
+      collectables.clear(); //<>//
     }
   }
 }
@@ -165,12 +172,15 @@ void keyPressed() {
     } else {
       if(key == TAB)
         state = State.ESCAPE_MENU;
+        sounds.changeState(State.GAME, State.ESCAPE_MENU);
     }
   } else if(state == State.DEATH && keyCode == ENTER) {
     state = State.MAIN_MENU;
     collectables.clear();
+    sounds.changeState(State.DEATH, State.MAIN_MENU);
   }
 }
+
 void checkFile(int diff) {
   int score = collectables.ptsAccrued;
   if (diff == 1) {
