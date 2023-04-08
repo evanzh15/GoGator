@@ -10,6 +10,7 @@ class Sounds {
       sFiles[4] = new SoundFile(GoGator.this, "collectChomp.wav");
       sFiles[1].loop();
       currSound = sFiles[1];
+      currSound.amp(0.01);
   }
   
   void changeState(State prevState, State nextState) {
@@ -18,22 +19,26 @@ class Sounds {
       currSound.stop();
       currSound = sFiles[2];
       currSound.loop();
+      currSound.amp(0.01);
     } else if (prevState == State.GAME && nextState == State.ESCAPE_MENU) {
       currSound.pause();
     } else if (prevState == State.GAME && nextState == State.DEATH) {
       currSound.stop();
       currSound = sFiles[3];
       currSound.play();
+      currSound.amp(0.01);
     } else if (prevState == State.ESCAPE_MENU && nextState == State.GAME) {
       currSound.play();
     } else if (prevState == State.DEATH && nextState == State.MAIN_MENU) {
       currSound.stop();
       currSound = sFiles[1];
       currSound.play();
+      currSound.amp(0.01);
     }
   }
   
   void playSound(SoundFile sound) {
     sound.play();
+    sound.amp(0.01);
   }
 }
