@@ -14,8 +14,7 @@ class Sounds {
   }
   
   void changeState(State prevState, State nextState) {
-    if (prevState == State.MAIN_MENU && nextState == State.GAME || 
-    prevState == State.ESCAPE_MENU && nextState == State.MAIN_MENU) {
+    if (prevState == State.MAIN_MENU && nextState == State.GAME) {
       currSound.stop();
       currSound = sFiles[2];
       currSound.loop();
@@ -29,7 +28,8 @@ class Sounds {
       currSound.amp(0.01);
     } else if (prevState == State.ESCAPE_MENU && nextState == State.GAME) {
       currSound.play();
-    } else if (prevState == State.DEATH && nextState == State.MAIN_MENU) {
+    } else if (prevState == State.DEATH && nextState == State.MAIN_MENU || 
+    prevState == State.ESCAPE_MENU && nextState == State.MAIN_MENU) {
       currSound.stop();
       currSound = sFiles[1];
       currSound.play();
