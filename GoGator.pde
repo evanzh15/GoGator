@@ -1,17 +1,17 @@
-/* //<>//
-  Team Members: 
-  Kyle McClelland
-  Milo Duty
-  Evan Zhang
-  Niloufar Saririan
-*/
+/* //<>// //<>// //<>// //<>// //<>//
+  Team Members:
+ Kyle McClelland
+ Milo Duty
+ Evan Zhang
+ Niloufar Saririan
+ */
 import java.util.Map;
 
 enum State {
   MAIN_MENU,
-  GAME,
-  ESCAPE_MENU,
-  DEATH
+    GAME,
+    ESCAPE_MENU,
+    DEATH
 }
 PImage[] cSprites = new PImage[11];
 PImage[] vSprites = new PImage[3];
@@ -31,6 +31,9 @@ BufferedReader readH;
 int wCount = 0;
 int diff = 0;
 Sounds sounds;
+String[] checkScoresE;
+String[] checkScoresH;
+String[] saveScore;
 
 void setup() {
   size(600, 600);
@@ -40,14 +43,14 @@ void setup() {
   frameRate(60);
   collectables = new Collectables();
   vehicles = new Vehicles();
-  
+
   // GoGator initialized at MAIN_MENU state
   state = State.MAIN_MENU;
   bckgrnd = loadImage("gogator_menu.png");
   road = loadImage("gogator_road.png");
-  
+
   sounds = new Sounds();
-  
+
   // Instantiating collectables
   cSprites[0] = loadImage("computersprite.png");
   cSprites[1] = loadImage("friessprite.png");
@@ -60,17 +63,24 @@ void setup() {
   cSprites[8] = loadImage("phonesprite.png");
   cSprites[9] = loadImage("pizzasprite.png");
   cSprites[10] = loadImage("calculatorsprite.png");
-  
+
   // Instantiating vehicles
   vSprites[0] = loadImage("bluecar.png");
   vSprites[1] = loadImage("greycar.png");
   vSprites[2] = loadImage("bussprite.png");
+
+  //writeE = createWriter("highscoreEasy.txt");
+  //readE = createReader("highscoreEasy.txt");
+
+  checkScoresE = loadStrings("highscoreEasy.txt");
+  checkScoresH = loadStrings("highscoreHard.txt");
+  saveScore = new String[1];
 }
 
 void draw() {
   // Draw everything according to game state.
   background(bckgrnd);
-  if(state == State.MAIN_MENU) {
+  if (state == State.MAIN_MENU) {
     pushMatrix();
     rectMode(CORNER);
     fill(255);
@@ -85,7 +95,8 @@ void draw() {
     popMatrix();
     // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);
-  } else if(state == State.GAME) {
+  } else if (state == State.GAME) {
+    wCount = 0;
     diff = 1;
     background(road);
     imageMode(CENTER);
@@ -93,7 +104,7 @@ void draw() {
     pushMatrix();
     rectMode(CORNER);
     fill(255, 0, 0);
-    textAlign(LEFT); //<>//
+    textAlign(LEFT);
     textSize(30);
     text(collectables.getPtsAccrued(), 10, 30);
     textSize(20);
@@ -102,9 +113,9 @@ void draw() {
     popMatrix();
     collectables.drawCollectables();
     vehicles.drawVehicles();
-  } else if(state == State.ESCAPE_MENU) {
+  } else if (state == State.ESCAPE_MENU) {
     background(road);
-    pushMatrix(); //<>//
+    pushMatrix();
     rectMode(CORNER);
     fill(255);
     rect(200, 400, 200, 50);
@@ -116,7 +127,7 @@ void draw() {
     text("RESUME", 300, 440);
     text("MAIN MENU", 300, 540);
     popMatrix();
-  } else if(state == State.DEATH) {
+  } else if (state == State.DEATH) {
     background(road);
     pushMatrix();
     rectMode(CORNER);
@@ -136,45 +147,45 @@ void draw() {
 void mousePressed() {
   // If mouse is within desired coordinates during a specific
   // game state, it will produce button specific outcomes.
-  if(state == State.MAIN_MENU) {
-    if(mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
+  if (state == State.MAIN_MENU) {
+    if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
       state = State.GAME;
       sounds.changeState(State.MAIN_MENU, State.GAME);
-    } else if(mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
+    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
       exit();
     }
-  } else if(state == State.ESCAPE_MENU) {
-    if(mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
+  } else if (state == State.ESCAPE_MENU) {
+    if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
       state = State.GAME;
       sounds.changeState(State.ESCAPE_MENU, State.GAME);
-    } else if(mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
+    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
       state = State.MAIN_MENU;
       sounds.changeState(State.ESCAPE_MENU, State.MAIN_MENU);
-      collectables.clear(); //<>//
+      collectables.clear();
     }
   }
 }
 
 void keyPressed() {
-  if(state == State.GAME) {
-    // Processing needs to check if the key is coded for arrow keys, 
+  if (state == State.GAME) {
+    // Processing needs to check if the key is coded for arrow keys,
     // alt, control, and shift. All other keys that are pressed can be
     // checked via 'key == (KeyPressed)'
-    if(key == CODED) {
-      if(keyCode == UP)
+    if (key == CODED) {
+      if (keyCode == UP)
         albert.moveUp();
-      else if(keyCode == DOWN)
+      else if (keyCode == DOWN)
         albert.moveDown();
-      else if(keyCode == LEFT)
+      else if (keyCode == LEFT)
         albert.moveLeft();
-      else if(keyCode == RIGHT)
-        albert.moveRight(); //<>//
+      else if (keyCode == RIGHT)
+        albert.moveRight();
     } else {
-      if(key == TAB)
+      if (key == TAB)
         state = State.ESCAPE_MENU;
-        sounds.changeState(State.GAME, State.ESCAPE_MENU);
+      sounds.changeState(State.GAME, State.ESCAPE_MENU);
     }
-  } else if(state == State.DEATH && keyCode == ENTER) {
+  } else if (state == State.DEATH && keyCode == ENTER) {
     state = State.MAIN_MENU;
     collectables.clear();
     sounds.changeState(State.DEATH, State.MAIN_MENU);
@@ -184,35 +195,17 @@ void keyPressed() {
 void checkFile(int diff) {
   int score = collectables.ptsAccrued;
   if (diff == 1) {
-    writeE = createWriter("highscoreEasy.txt");
-    readE = createReader("highscoreEasy.txt");
-    String[] checkScores = loadStrings("highscoreEasy.txt");
-    String[] saveScores = new String[1];
-    if (checkScores.length > 0) {
-      int checkScore = int(checkScores[0]);
-      if (score > checkScore) {
-        saveScores[0] = str(score);
-        saveStrings("highscoreEasy.txt", saveScores);
-      }
-      println("Stored score: " + checkScore);
-      writeE.flush();
-      writeE.close();
+    int checkScore = int(checkScoresE[0]);
+    if (score > checkScore) {
+      saveScore[0] = str(score);
+      saveStrings("highscoreEasy.txt", saveScore);
     }
-    else {
-      saveScores[0] = str(score);
-      saveStrings("highscoreEasy.txt", saveScores);
-    }
-  } 
-  else {
-    writeH = createWriter("highscoreHard.txt");
-    readH = createReader("highscoreHard.txt");
-     String[] scores = loadStrings("highscoreHard.txt");
-    if (scores.length > 0) {
-      int checkScore = int(scores[0]);
-      println("Stored score: " + checkScore);
-    }
-    writeH.flush();
-    writeH.close();
   }
-  
+  else {
+    int checkScore = int(checkScoresH[0]);
+    if (score > checkScore) {
+      saveScore[0] = str(score);
+      saveStrings("highscoreHard.txt", saveScore);
+    }
+  }
 }
