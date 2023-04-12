@@ -101,7 +101,6 @@ class Vehicles {
   }
   
   void clear() {
-    println("here");
     for (int i = 0; i < list.size(); i++) {
       list.get(i).setX(1000);
     }

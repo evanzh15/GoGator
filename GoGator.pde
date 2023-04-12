@@ -1,5 +1,5 @@
 /* //<>// //<>// //<>// //<>// //<>//
-  Team Members:
+ Team Members:
  Kyle McClelland
  Milo Duty
  Evan Zhang
@@ -76,8 +76,6 @@ void setup() {
   checkScoresE = loadStrings("highscoreEasy.txt");
   checkScoresH = loadStrings("highscoreHard.txt");
   saveScore = new String[1];
-  
-  
 }
 
 void draw() {
@@ -166,13 +164,11 @@ void mousePressed() {
       diff = 1;
       state = State.GAME;
       sounds.changeState(State.MAIN_MENU, State.GAME);
-    } 
-    else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
+    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
       diff = 2;
       state = State.GAME;
       sounds.changeState(State.MAIN_MENU, State.GAME);
-    }
-    else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
+    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
       exit();
     }
   } else if (state == State.ESCAPE_MENU) {
@@ -220,11 +216,12 @@ void checkFile(int diff) {
   if (diff == 1) {
     int checkScore = int(checkScoresE[0]);
     if (score > checkScore) {
+      textSize(100);
+      text("New High Score: " + score + "!", 300, 300);
       saveScore[0] = str(score);
       saveStrings("highscoreEasy.txt", saveScore);
     }
-  }
-  else {
+  } else {
     int checkScore = int(checkScoresH[0]);
     if (score > checkScore) {
       saveScore[0] = str(score);
