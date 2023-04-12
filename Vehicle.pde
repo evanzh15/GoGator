@@ -33,6 +33,7 @@ class Vehicle {
   float getSpeed() {return speed;}
   float getX() {return xpos;}
   float getY() {return ypos;}
+  void setX(float x) {xpos = x;}
   int getSpawnPoint() {return spawnPoint;}
   int getID() {return id;}
 }

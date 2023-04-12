@@ -2,9 +2,19 @@ class Vehicles {
   ArrayList<Vehicle> list = new ArrayList<Vehicle>();
   int timer = 0;
   int num;
+  
+  
   void drawVehicles() {
+    //Depending on the difficulty chosen, the rate at which the vehicles appear is decided by time/delay. 
+    if (diff == 1) {
+      delay = 3;
+    }
+    else if (diff == 2) {
+      delay = 5;
+    }
+    //Creates new vehicles when the time set by the difficulty is met. 
     int passedTime = millis() - savedTime2;
-    if (passedTime > totalTime/5) {
+    if (passedTime > totalTime/delay) {
       addVehicle();
       savedTime2 = millis();
     }
@@ -21,7 +31,6 @@ class Vehicles {
         rmVehicles(temp.getID());
       } else {
         image(vSprites[temp.getType()], temp.getX(), temp.getY());
-        //rect(temp.getX(), temp.getY(), 50, 30);
         if (temp.spawnPoint == 0) {
           list.get(i).xpos += temp.getSpeed();
         } else if (temp.spawnPoint == 1) {
@@ -89,5 +98,14 @@ class Vehicles {
       }
     }
     return -1;
+  }
+  
+  void clear() {
+    println("here");
+    for (int i = 0; i < list.size(); i++) {
+      list.get(i).setX(1000);
+    }
+    list.clear();
+    
   }
 }

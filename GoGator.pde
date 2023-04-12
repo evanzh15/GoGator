@@ -34,6 +34,7 @@ Sounds sounds;
 String[] checkScoresE;
 String[] checkScoresH;
 String[] saveScore;
+int delay = 0;
 
 void setup() {
   size(600, 600);
@@ -75,6 +76,8 @@ void setup() {
   checkScoresE = loadStrings("highscoreEasy.txt");
   checkScoresH = loadStrings("highscoreHard.txt");
   saveScore = new String[1];
+  
+  
 }
 
 void draw() {
@@ -84,20 +87,21 @@ void draw() {
     pushMatrix();
     rectMode(CORNER);
     fill(255);
+    rect(200, 300, 200, 50);
     rect(200, 400, 200, 50);
     rect(200, 500, 200, 50);
     textSize(100);
     text("GoGator!", 300, 200);
     fill(0);
-    textSize(40);
-    text("START", 300, 440);
+    textSize(38);
+    text("EASY", 300, 340);
+    text("RUSH HOUR", 300, 440);
     text("EXIT", 300, 540);
     popMatrix();
     // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);
   } else if (state == State.GAME) {
     wCount = 0;
-    diff = 1;
     background(road);
     imageMode(CENTER);
     albert.drawAlbert();
@@ -126,6 +130,11 @@ void draw() {
     textSize(40);
     text("RESUME", 300, 440);
     text("MAIN MENU", 300, 540);
+    textSize(30);
+    fill(255, 0, 0);
+    textAlign(LEFT);
+    text(collectables.getPtsAccrued(), 10, 30);
+    textAlign(CENTER);
     popMatrix();
   } else if (state == State.DEATH) {
     background(road);
@@ -136,6 +145,11 @@ void draw() {
     text("ALBERT DIED.", 300, 300);
     textSize(20);
     text("Press enter to continue.", 300, 580);
+    textSize(30);
+    fill(255, 0, 0);
+    textAlign(LEFT);
+    text(collectables.getPtsAccrued(), 10, 30);
+    textAlign(CENTER);
     popMatrix();
     if (wCount == 0) {
       checkFile(diff);
@@ -148,10 +162,17 @@ void mousePressed() {
   // If mouse is within desired coordinates during a specific
   // game state, it will produce button specific outcomes.
   if (state == State.MAIN_MENU) {
-    if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
+    if (mouseX >= 200 && mouseX <= 400 && mouseY >= 300 && mouseY <= 350) {
+      diff = 1;
       state = State.GAME;
       sounds.changeState(State.MAIN_MENU, State.GAME);
-    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
+    } 
+    else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
+      diff = 2;
+      state = State.GAME;
+      sounds.changeState(State.MAIN_MENU, State.GAME);
+    }
+    else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
       exit();
     }
   } else if (state == State.ESCAPE_MENU) {
@@ -162,6 +183,7 @@ void mousePressed() {
       state = State.MAIN_MENU;
       sounds.changeState(State.ESCAPE_MENU, State.MAIN_MENU);
       collectables.clear();
+      vehicles.clear();
     }
   }
 }
@@ -188,6 +210,7 @@ void keyPressed() {
   } else if (state == State.DEATH && keyCode == ENTER) {
     state = State.MAIN_MENU;
     collectables.clear();
+    vehicles.clear();
     sounds.changeState(State.DEATH, State.MAIN_MENU);
   }
 }
