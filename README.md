@@ -1,9 +1,9 @@
 # GoGator
 CAP3032 Final Project - Frogger, but with Albert!
 Team members: 
-Kyle McClelland
-Milo Duty
-Evan Zhang
+Kyle McClelland,
+Milo Duty,
+Evan Zhang,
 Niloufar Saririan
 
 1. What is the nature of the gameplay? That is, what challenges will the player face? What actions will the player take to overcome those challenges? 
