@@ -22,6 +22,7 @@ class Vehicles {
     int check = collision(albert.getX(), albert.getY());
     if (check != -1) {
       state = State.DEATH;
+      sounds.playSound(sounds.sFiles[0]);
       sounds.changeState(State.GAME, State.DEATH);
     }
     for (int i = 0; i < list.size(); i++) {
