@@ -84,17 +84,17 @@ void draw() {
   if (state == State.MAIN_MENU) {
     pushMatrix();
     rectMode(CORNER);
-    fill(255);
-    rect(200, 300, 200, 50);
+    fill(250, 250, 255);
+    stroke(232, 128, 42);
+    strokeWeight(3);
     rect(200, 400, 200, 50);
-    rect(200, 500, 200, 50);
-    textSize(100);
-    text("GoGator!", 300, 200);
-    fill(0);
+    rect(200, 460, 200, 50);
+    rect(200, 520, 200, 50);
+    fill(8, 8, 64);
     textSize(38);
-    text("EASY", 300, 340);
-    text("RUSH HOUR", 300, 440);
-    text("EXIT", 300, 540);
+    text("EASY", 300, 440);
+    text("RUSH HOUR", 300, 500);
+    text("EXIT", 300, 560);
     popMatrix();
     // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);

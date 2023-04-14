@@ -1,5 +1,5 @@
-int albertWidth = 120;
-int albertHeight = 120;
+int albertWidth = 100;
+int albertHeight = 100;
 class Albert {
   int xpos, ypos;
   float w, h;
