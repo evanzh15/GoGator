@@ -42,7 +42,7 @@ class Vehicles {
   }
 
   void addVehicle() {
-    int type = (int)random(0, 3);
+    int type = (int)random(0, 5);
     int spawnPoint = (int)random(0, 2);
     int lane  = (int) random(0, 3);
     float ypos = 0;
@@ -76,7 +76,10 @@ class Vehicles {
     }
 
     //Change speed (the second parameter) to be a varible depending on the difficulty
-    list.add(new Vehicle(type, 5, xpos, ypos, spawnPoint, num));
+    if (spawnPoint == 0)
+      list.add(new Vehicle(type, 5, xpos, ypos, spawnPoint, num));
+    else
+      list.add(new Vehicle(type+5, 5, xpos, ypos, spawnPoint, num));
 
     num++;
   }
