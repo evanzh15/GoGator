@@ -35,6 +35,8 @@ String[] checkScoresE;
 String[] checkScoresH;
 String[] saveScore;
 int delay = 0;
+boolean newEasyHS = false;
+boolean newHardHS = false;
 
 void setup() {
   size(600, 600);
@@ -153,6 +155,16 @@ void draw() {
       checkFile(diff);
       wCount = -1;
     }
+    if (newEasyHS) {
+      textSize(30);
+      fill(#3ABC1E);
+      text("New Easy High Score: " + collectables.getPtsAccrued() + "!", 300, 400);
+    }
+    if (newHardHS) {
+      textSize(30);
+      fill(#3ABC1E);
+      text("New Rush Hour High Score: " + collectables.getPtsAccrued() + "!", 300, 400);
+    }
   }
 }
 
@@ -180,6 +192,8 @@ void mousePressed() {
       sounds.changeState(State.ESCAPE_MENU, State.MAIN_MENU);
       collectables.clear();
       vehicles.clear();
+      newEasyHS = false;
+      newHardHS = false;
     }
   }
 }
@@ -214,18 +228,27 @@ void keyPressed() {
 void checkFile(int diff) {
   int score = collectables.ptsAccrued;
   if (diff == 1) {
-    int checkScore = int(checkScoresE[0]);
-    if (score > checkScore) {
-      textSize(100);
-      text("New High Score: " + score + "!", 300, 300);
-      saveScore[0] = str(score);
-      saveStrings("highscoreEasy.txt", saveScore);
+    if (checkScoresE.length != 0) {
+      int checkScore = int(checkScoresE[0]);
+      if (score > checkScore) {
+        newEasyHS = true;
+        saveScore[0] = str(score);
+        saveStrings("highscoreEasy.txt", saveScore);
+      }
+    }
+    else {
+      println("Easy mode high score file is empty, please write a 0 in the file to use this feature.");
     }
   } else {
-    int checkScore = int(checkScoresH[0]);
-    if (score > checkScore) {
-      saveScore[0] = str(score);
-      saveStrings("highscoreHard.txt", saveScore);
+    if (checkScoresH.length != 0) {
+      int checkScore = int(checkScoresH[0]);
+      if (score > checkScore) {
+        saveScore[0] = str(score);
+        saveStrings("highscoreHard.txt", saveScore);
+      }
+    }
+    else {
+      println("Rush mode mode high score file is empty, please write a 0 in the file to use this feature.");
     }
   }
 }
