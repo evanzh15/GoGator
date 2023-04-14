@@ -19,28 +19,15 @@ class Collectables {
     for(int i = 0; i < items.size(); i++) {
       Collectable temp = items.get(i);
       image(cSprites[temp.getType()], temp.getX(), temp.getY());
+      if (millis() - temp.getSpawnTime() > 10000)
+        rmCollectable(i);
     }
   }
   void addCollectable() {
     int type = (int)random(0,11);
     int cPts = -1;
-    //switch (type) {
-    //  case 0:
-    //    cPts = 100;
-    //    break;
-    //  case 1:
-    //    cPts = 150;
-    //    break;
-    //  // Fill in the rest
-    //  case 11:
-    //    cPts = 300;
-    //    break;
-    //  default:
-    //    cPts = 100;
-    //    break;
-    //}
     cPts = (int)map(type, 0, 10, 50, 300);
-    items.add(new Collectable(type, (int)random(0,20)*30, (int)random(0,20)*30, haveBeenSpawned, cPts));
+    items.add(new Collectable(type, (int)random(1,20)*30, (int)random(1,20)*30, haveBeenSpawned, cPts, millis()));
     onBoard++;
     haveBeenSpawned++;
   }

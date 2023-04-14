@@ -19,7 +19,10 @@ class Albert {
   void drawAlbert() {
     //implement draw albert function once we have image for him
     fill(255);
-    //rect(xpos, ypos, 30, 30); // Placeholder
+    pushMatrix();
+    rectMode(CENTER);
+    rect(xpos, ypos, albertWidth, albertHeight); // Placeholder
+    popMatrix();
     if (draw == 1) {
       albertSpriteUp.resize(albertWidth, albertHeight);
       image(albertSpriteUp, xpos, ypos);

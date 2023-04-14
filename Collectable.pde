@@ -1,13 +1,14 @@
 class Collectable {
   int type, id, pts;
-  float xpos, ypos;
+  float xpos, ypos, spawnTime;
 
-  Collectable(int type, int xpos, int ypos, int id, int pts) {
+  Collectable(int type, int xpos, int ypos, int id, int pts, float spawnTime) {
     this.type = type;
     this.xpos = xpos;
     this.ypos = ypos;
     this.id = id;
     this.pts = pts;
+    this.spawnTime = spawnTime;
   }
   
   int getID() {
@@ -28,5 +29,9 @@ class Collectable {
   
   int getPts() {
     return pts;
+  }
+  
+  float getSpawnTime() {
+    return spawnTime;
   }
 }
