@@ -1,4 +1,4 @@
-/* //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+/* //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
  Team Members:
  Kyle McClelland
  Milo Duty
@@ -93,7 +93,7 @@ void draw() {
     pushMatrix();
     rectMode(CORNER);
     fill(250, 250, 255);
-    stroke(232, 128, 42); //<>//
+    stroke(232, 128, 42); //<>// //<>//
     strokeWeight(3);
     rect(200, 400, 200, 50);
     rect(200, 460, 200, 50);
@@ -104,7 +104,7 @@ void draw() {
     text("RUSH HOUR", 300, 500);
     text("EXIT", 300, 560);
     popMatrix();
-    // Albert initialized at center of screen //<>//
+    // Albert initialized at center of screen //<>// //<>//
     albert = new Albert(width/2, height/2, width, height);
   } else if (state == State.GAME) {
     wCount = 0;
@@ -150,7 +150,7 @@ void draw() {
     textSize(100);
     text("ALBERT DIED.", 300, 300);
     textSize(20);
-    text("Press enter to continue.", 300, 580); //<>//
+    text("Press enter to continue.", 300, 580); //<>// //<>//
     textSize(30);
     fill(255, 0, 0);
     textAlign(LEFT);
@@ -168,7 +168,7 @@ void draw() {
     }
     if (newHardHS) {
       textSize(30);
-      fill(#3ABC1E); //<>//
+      fill(#3ABC1E); //<>// //<>//
       text("New Rush Hour High Score: " + collectables.getPtsAccrued() + "!", 300, 400);
     }
   }

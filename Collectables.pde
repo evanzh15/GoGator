@@ -46,10 +46,7 @@ class Collectables {
   int collision(int albertX, int albertY) {
     for(int i = 0; i < items.size(); i++) {
       Collectable temp = items.get(i);
-      //if(temp.getX() == albertX && temp.getY() == albertY) {
-      //  return temp.getID();
-      //}
-      if((temp.getX() < albertX + albertWidth/2 && temp.getY() < albertY + albertHeight/2) && (temp.getX() + 30 > albertX - albertWidth/2 && temp.getY() + 30 > albertY - albertHeight/2)) {
+      if((temp.getX() - 15 < albertX + albertWidth/2 && temp.getY() - 15 < albertY + albertHeight/2) && (temp.getX() + 15 > albertX - albertWidth/2 && temp.getY() + 15 > albertY - albertHeight/2)) {
         sounds.playSound(sounds.sFiles[4]);
         return temp.getID();
       }

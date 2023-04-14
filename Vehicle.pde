@@ -1,34 +1,19 @@
 class Vehicle {
-  //Car, rts bus, or moped
-  int type;
-  float speed;
-  float ypos;
-  //0 for left, 1 for right
-  int spawnPoint;
-  float xpos;
-  int id;
-  Vehicle(int type, float speed, float xpos, float ypos, int spawnPoint, int id) {
+  //Type: variants of car, or rts bus
+  //spawnPoint: 0 for left, 1 for right
+  int type, spawnPoint, id, sizeX, sizeY;
+  float xpos, ypos, speed;
+
+  Vehicle(int type, float speed, float xpos, float ypos, int spawnPoint, int id, int sizeX, int sizeY) {
     this.type = type;
     this.speed = speed;
     this.xpos = xpos;
     this.ypos = ypos;
     this.spawnPoint = spawnPoint;
     this.id = id;
-  }
-  
-  void drawVehicle(int type, float xpos) {
-    if (type == 0) {
-      //Implement
-    }
-    else if (type == 1) {
-      //Implement
-    }
-    else if (type == 2) {
-      //Implement
-    }
-    
-  }
-  
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
+  }  
   int getType() {return type;}
   float getSpeed() {return speed;}
   float getX() {return xpos;}
@@ -36,4 +21,6 @@ class Vehicle {
   void setX(float x) {xpos = x;}
   int getSpawnPoint() {return spawnPoint;}
   int getID() {return id;}
+  int getSizeX() {return sizeX;} 
+  int getSizeY() {return sizeY;}
 }

@@ -1,4 +1,4 @@
-int albertWidth = 100;
+int albertWidth = 61;
 int albertHeight = 100;
 class Albert {
   int xpos, ypos;
@@ -7,6 +7,8 @@ class Albert {
   PImage albertSpriteDown = loadImage("albertSprite_Down.png");
   PImage albertSpriteLeft = loadImage("albertSprite_Left.png");
   PImage albertSpriteRight = loadImage("albertSprite_Right.png");
+  
+  
   //up = 1, down = 2, left = 3, right = 4
   int draw = 1;
   Albert(int xpos, int ypos, float w, float h) {
@@ -19,10 +21,6 @@ class Albert {
   void drawAlbert() {
     //implement draw albert function once we have image for him
     fill(255);
-    pushMatrix();
-    rectMode(CENTER);
-    rect(xpos, ypos, albertWidth, albertHeight); // Placeholder
-    popMatrix();
     if (draw == 1) {
       albertSpriteUp.resize(albertWidth, albertHeight);
       image(albertSpriteUp, xpos, ypos);
@@ -46,6 +44,8 @@ class Albert {
       xpos -= 30;
     }
     draw = 3;
+    albertWidth = 100;
+    albertHeight = 61;
     //print(xpos, ypos, '\n');
   }
   void moveRight() {
@@ -53,6 +53,8 @@ class Albert {
       xpos += 30;
     }
     draw = 4;
+    albertWidth = 100;
+    albertHeight = 61;
     //print(xpos, ypos, '\n');
   }
   void moveDown() {
@@ -60,6 +62,8 @@ class Albert {
       ypos += 30;
     }
     draw = 2;
+    albertWidth = 61;
+    albertHeight = 100;
     //print(xpos, ypos, '\n');
   }
   void moveUp() {
@@ -67,6 +71,8 @@ class Albert {
       ypos -= 30;
     }
     draw = 1;
+    albertWidth = 61;
+    albertHeight = 100;
     //print(xpos, ypos, '\n');
   }
   int getX() {

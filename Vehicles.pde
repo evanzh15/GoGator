@@ -3,7 +3,6 @@ class Vehicles {
   int timer = 0;
   int num;
   
-  
   void drawVehicles() {
     //Depending on the difficulty chosen, the rate at which the vehicles appear is decided by time/delay. 
     if (diff == 1) {
@@ -44,7 +43,8 @@ class Vehicles {
   void addVehicle() {
     int type = (int)random(0, 5);
     int spawnPoint = (int)random(0, 2);
-    int lane  = (int) random(0, 3);
+    int lane = (int) random(0, 3);
+    int sizeX = 0, sizeY = 0; 
     float ypos = 0;
     float xpos = -100;
     if (spawnPoint == 0) {
@@ -76,10 +76,19 @@ class Vehicles {
     }
 
     //Change speed (the second parameter) to be a varible depending on the difficulty
-    if (spawnPoint == 0)
-      list.add(new Vehicle(type, 5, xpos, ypos, spawnPoint, num));
-    else
-      list.add(new Vehicle(type+5, 5, xpos, ypos, spawnPoint, num));
+    if (spawnPoint == 1)
+      type += 5;
+    
+    //if type is a bus, size is 190 pixels, else 110 pixels.
+    if (type % 5 == 4) {
+      sizeX = 190;
+      sizeY = 70;
+    } else {
+      sizeX = 110;
+      sizeY = 50;
+    }
+    
+    list.add(new Vehicle(type, 5, xpos, ypos, spawnPoint, num, sizeX, sizeY));
 
     num++;
   }
@@ -97,7 +106,8 @@ class Vehicles {
   int collision(int albertX, int albertY) {
     for (int i = 0; i < list.size(); i++) {
       Vehicle temp = list.get(i);
-      if ((temp.getX() < albertX + 40 && temp.getY() < albertY + 40) && (temp.getX() + 25 > albertX - 40 && temp.getY() + 25 > albertY - 40)) {
+      if ((temp.getX() - temp.getSizeX()/2 < albertX + albertWidth/2 && temp.getY() - temp.getSizeY()/2 < albertY + albertHeight/2) &&
+      (temp.getX() + temp.getSizeX()/2 > albertX - albertWidth/2 && temp.getY() + temp.getSizeY()/2 > albertY - albertHeight/2)) {
         return temp.getID();
       }
     }
