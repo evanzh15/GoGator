@@ -43,28 +43,28 @@ class Albert {
       xpos -= 30;
     }
     draw = 3;
-    print(xpos, ypos, '\n');
+    //print(xpos, ypos, '\n');
   }
   void moveRight() {
     if (xpos != w - 30) {
       xpos += 30;
     }
     draw = 4;
-    print(xpos, ypos, '\n');
+    //print(xpos, ypos, '\n');
   }
   void moveDown() {
     if (ypos != h - 30) {
       ypos += 30;
     }
     draw = 2;
-    print(xpos, ypos, '\n');
+    //print(xpos, ypos, '\n');
   }
   void moveUp() {
     if (ypos != 0) {
       ypos -= 30;
     }
     draw = 1;
-    print(xpos, ypos, '\n');
+    //print(xpos, ypos, '\n');
   }
   int getX() {
     return xpos;
