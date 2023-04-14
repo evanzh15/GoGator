@@ -1,4 +1,4 @@
-/* //<>// //<>// //<>// //<>// //<>//
+/* //<>// //<>// //<>// //<>// //<>// //<>//
  Team Members:
  Kyle McClelland
  Milo Duty
@@ -172,15 +172,15 @@ void mousePressed() {
   // If mouse is within desired coordinates during a specific
   // game state, it will produce button specific outcomes.
   if (state == State.MAIN_MENU) {
-    if (mouseX >= 200 && mouseX <= 400 && mouseY >= 300 && mouseY <= 350) {
+    if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
       diff = 1;
       state = State.GAME;
       sounds.changeState(State.MAIN_MENU, State.GAME);
-    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
+    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 460 && mouseY <= 510) {
       diff = 2;
       state = State.GAME;
       sounds.changeState(State.MAIN_MENU, State.GAME);
-    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 500 && mouseY <= 550) {
+    } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 520 && mouseY <= 570) {
       exit();
     }
   } else if (state == State.ESCAPE_MENU) {
@@ -243,6 +243,7 @@ void checkFile(int diff) {
     if (checkScoresH.length != 0) {
       int checkScore = int(checkScoresH[0]);
       if (score > checkScore) {
+        newHardHS = true;
         saveScore[0] = str(score);
         saveStrings("highscoreHard.txt", saveScore);
       }
