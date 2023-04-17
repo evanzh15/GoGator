@@ -7,8 +7,8 @@ class Albert {
   PImage albertSpriteDown = loadImage("albertSprite_Down.png");
   PImage albertSpriteLeft = loadImage("albertSprite_Left.png");
   PImage albertSpriteRight = loadImage("albertSprite_Right.png");
-  
-  
+
+  //Constructor for Albert
   //up = 1, down = 2, left = 3, right = 4
   int draw = 1;
   Albert(int xpos, int ypos, float w, float h) {
@@ -18,6 +18,7 @@ class Albert {
     this.h = h;
   }
 
+  //Draws Albert based on the direction he is facing.
   void drawAlbert() {
     //implement draw albert function once we have image for him
     fill(255);
@@ -39,6 +40,7 @@ class Albert {
     }
   }
 
+  //Moves Albert left (decreases xpos)
   void moveLeft() {
     if (xpos != 0) {
       xpos -= 30;
@@ -48,6 +50,7 @@ class Albert {
     albertHeight = 61;
     //print(xpos, ypos, '\n');
   }
+  //Moves Albert right (increases xpos)
   void moveRight() {
     if (xpos != w - 30) {
       xpos += 30;
@@ -57,6 +60,7 @@ class Albert {
     albertHeight = 61;
     //print(xpos, ypos, '\n');
   }
+  //Moves Albert down (increases ypos)
   void moveDown() {
     if (ypos != h - 30) {
       ypos += 30;
@@ -66,6 +70,7 @@ class Albert {
     albertHeight = 100;
     //print(xpos, ypos, '\n');
   }
+  //Moves Albert up (increases ypos)
   void moveUp() {
     if (ypos != 0) {
       ypos -= 30;
@@ -75,6 +80,8 @@ class Albert {
     albertHeight = 100;
     //print(xpos, ypos, '\n');
   }
+
+  //Returns Albert's x or y position
   int getX() {
     return xpos;
   }

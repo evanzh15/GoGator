@@ -2,6 +2,7 @@ class Collectable {
   int type, id, pts;
   float xpos, ypos, spawnTime;
 
+  //Collectable constructor
   Collectable(int type, int xpos, int ypos, int id, int pts, float spawnTime) {
     this.type = type;
     this.xpos = xpos;
@@ -11,6 +12,7 @@ class Collectable {
     this.spawnTime = spawnTime;
   }
   
+  //Returns the attributes of the collectable
   int getID() {
     return id;
   }
