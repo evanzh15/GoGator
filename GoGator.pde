@@ -37,6 +37,8 @@ String[] saveScore;
 int delay = 0;
 boolean newEasyHS = false;
 boolean newHardHS = false;
+boolean newEasyHSPrint = false;
+boolean newHardHSPrint = false;
 
 
 //Loads in all the sprites and sounds, sets up time tracking and IO files, and creates objects for collectables and vehicles.
@@ -83,13 +85,15 @@ void setup() {
   //writeE = createWriter("highscoreEasy.txt");
   //readE = createReader("highscoreEasy.txt");
 
-  checkScoresE = loadStrings("highscoreEasy.txt");
-  checkScoresH = loadStrings("highscoreHard.txt");
+  //checkScoresE = loadStrings("highscoreEasy.txt");
+  //checkScoresH = loadStrings("highscoreHard.txt");
   saveScore = new String[1];
 }
 
 void draw() {
   // Draw everything according to game state.
+  checkScoresE = loadStrings("highscoreEasy.txt");
+  checkScoresH = loadStrings("highscoreHard.txt");
   background(bckgrnd);
   //Draws main menu
   if (state == State.MAIN_MENU) {
@@ -171,12 +175,12 @@ void draw() {
       checkFile(diff);
       wCount = -1;
     }
-    if (newEasyHS) {
+    if (newEasyHSPrint) {
       textSize(30);
       fill(#3ABC1E);
       text("New Easy High Score: " + collectables.getPtsAccrued() + "!", 300, 400);
     }
-    if (newHardHS) {
+    else if (newHardHSPrint) {
       textSize(30);
       fill(#3ABC1E); //<>//
       text("New Rush Hour High Score: " + collectables.getPtsAccrued() + "!", 300, 400);
@@ -245,6 +249,8 @@ void keyPressed() {
     collectables.clear();
     vehicles.clear();
     sounds.changeState(State.DEATH, State.MAIN_MENU);
+    newEasyHSPrint = false;
+    newHardHSPrint = false;
   }
 }
 
@@ -256,17 +262,19 @@ void checkFile(int diff) {
       int checkScore = int(checkScoresE[0]);
       if (score > checkScore) {
         newEasyHS = true;
+        newEasyHSPrint = true;
         saveScore[0] = str(score);
         saveStrings("highscoreEasy.txt", saveScore);
       }
     } else {
       println("Easy mode high score file is empty, please write a 0 in the file to use this feature.");
     }
-  } else {
+  } else if (diff == 2){
     if (checkScoresH.length != 0) {
       int checkScore = int(checkScoresH[0]);
       if (score > checkScore) {
         newHardHS = true;
+        newHardHSPrint = true;
         saveScore[0] = str(score);
         saveStrings("highscoreHard.txt", saveScore);
       }
