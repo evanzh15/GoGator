@@ -1,4 +1,4 @@
-/* //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+/* //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
  Team Members:
  Kyle McClelland
  Milo Duty
@@ -100,7 +100,7 @@ void draw() {
     pushMatrix();
     rectMode(CORNER);
     fill(250, 250, 255);
-    stroke(232, 128, 42); //<>//
+    stroke(232, 128, 42);
     strokeWeight(3);
     rect(200, 400, 200, 50);
     rect(200, 460, 200, 50);
@@ -111,7 +111,7 @@ void draw() {
     text("RUSH HOUR", 300, 500);
     text("EXIT", 300, 560);
     popMatrix();
-    // Albert initialized at center of screen //<>//
+    // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);
   }
   //Draws game
@@ -132,7 +132,7 @@ void draw() {
     popMatrix();
     collectables.drawCollectables();
     vehicles.drawVehicles();
-  } 
+  }
   //Draws the pause menu (accessed with "tab")
   else if (state == State.ESCAPE_MENU) {
     background(road);
@@ -153,7 +153,7 @@ void draw() {
     text(collectables.getPtsAccrued(), 10, 30);
     textAlign(CENTER);
     popMatrix();
-  } 
+  }
   //Draws the death screen
   else if (state == State.DEATH) {
     background(road);
@@ -163,14 +163,14 @@ void draw() {
     textSize(100);
     text("ALBERT DIED.", 300, 300);
     textSize(20);
-    text("Press enter to continue.", 300, 580); //<>//
+    text("Press enter to continue.", 300, 580);
     textSize(30);
     fill(255, 0, 0);
     textAlign(LEFT);
     text(collectables.getPtsAccrued(), 10, 30);
     textAlign(CENTER);
     popMatrix();
-    //Checks the high score to write to high score file and display new high score message, if applicable. 
+    //Checks the high score to write to high score file and display new high score message, if applicable.
     if (wCount == 0) {
       checkFile(diff);
       wCount = -1;
@@ -179,16 +179,15 @@ void draw() {
       textSize(30);
       fill(#3ABC1E);
       text("New Easy High Score: " + collectables.getPtsAccrued() + "!", 300, 400);
-    }
-    else if (newHardHSPrint) {
+    } else if (newHardHSPrint) {
       textSize(30);
-      fill(#3ABC1E); //<>//
+      fill(#3ABC1E);
       text("New Rush Hour High Score: " + collectables.getPtsAccrued() + "!", 300, 400);
     }
   }
 }
 
-//Checks where the mouse is when a mouse press is detected. 
+//Checks where the mouse is when a mouse press is detected.
 void mousePressed() {
   // If mouse is within desired coordinates during a specific
   // game state, it will produce button specific outcomes.
@@ -219,7 +218,7 @@ void mousePressed() {
   }
 }
 
-//Checks what key is pressed for moving Albert, and resetting the game after a loss 
+//Checks what key is pressed for moving Albert, and resetting the game after a loss
 void keyPressed() {
   //Moves Albert
   if (state == State.GAME) {
@@ -235,14 +234,22 @@ void keyPressed() {
         albert.moveLeft();
       else if (keyCode == RIGHT)
         albert.moveRight();
-    } 
+    }
+    if (key == 'w')
+      albert.moveUp();
+    else if (key == 's')
+      albert.moveDown();
+    else if (key == 'a')
+      albert.moveLeft();
+    else if (key == 'd')
+      albert.moveRight();
     //Pauses the game
     else {
       if (key == TAB)
         state = State.ESCAPE_MENU;
       sounds.changeState(State.GAME, State.ESCAPE_MENU);
     }
-  } 
+  }
   //Resets the game, returning the player to the main menu following a loss
   else if (state == State.DEATH && keyCode == ENTER) {
     state = State.MAIN_MENU;
@@ -254,7 +261,7 @@ void keyPressed() {
   }
 }
 
-//Compares the score earned during the game to the stored high score, replaces it if necessary. 
+//Compares the score earned during the game to the stored high score, replaces it if necessary.
 void checkFile(int diff) {
   int score = collectables.ptsAccrued;
   if (diff == 1) {
@@ -269,7 +276,7 @@ void checkFile(int diff) {
     } else {
       println("Easy mode high score file is empty, please write a 0 in the file to use this feature.");
     }
-  } else if (diff == 2){
+  } else if (diff == 2) {
     if (checkScoresH.length != 0) {
       int checkScore = int(checkScoresH[0]);
       if (score > checkScore) {
