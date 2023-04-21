@@ -1,4 +1,4 @@
-/* //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+/* //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
  Team Members:
  Kyle McClelland
  Milo Duty
@@ -9,20 +9,19 @@ import java.util.Map;
 
 enum State {
   MAIN_MENU,
-    GAME,
-    ESCAPE_MENU,
-    DEATH
+  GAME,
+  ESCAPE_MENU,
+  DEATH,
+  HELP
 }
 PImage[] cSprites = new PImage[11];
 PImage[] vSprites = new PImage[10];
-PImage bckgrnd;
-PImage road;
+PImage bckgrnd, help, road;
 State state;
 Collectables collectables;
 Vehicles vehicles;
 Albert albert;
-int savedTime;
-int savedTime2;
+int savedTime, savedTime2;
 int totalTime = 3000;
 PrintWriter writeE;
 PrintWriter writeH;
@@ -31,9 +30,7 @@ BufferedReader readH;
 int wCount = 0;
 int diff = 0;
 Sounds sounds;
-String[] checkScoresE;
-String[] checkScoresH;
-String[] saveScore;
+String[] checkScoresE, checkScoresH, saveScore;
 int delay = 0;
 boolean newEasyHS = false;
 boolean newHardHS = false;
@@ -55,6 +52,7 @@ void setup() {
   state = State.MAIN_MENU;
   bckgrnd = loadImage("gogator_menu.png");
   road = loadImage("gogator_road.png");
+  help = loadImage("key_menu.png");
 
   sounds = new Sounds();
 
@@ -95,7 +93,7 @@ void draw() {
   checkScoresE = loadStrings("highscoreEasy.txt");
   checkScoresH = loadStrings("highscoreHard.txt");
   background(bckgrnd);
-  //Draws main menu
+  //Draws main menu //<>//
   if (state == State.MAIN_MENU) {
     pushMatrix();
     rectMode(CORNER);
@@ -105,11 +103,13 @@ void draw() {
     rect(200, 400, 200, 50);
     rect(200, 460, 200, 50);
     rect(200, 520, 200, 50);
-    fill(8, 8, 64);
+    rect(width-60, height-60, 50, 50);
+    fill(8, 8, 64); //<>//
     textSize(38);
     text("EASY", 300, 440);
     text("RUSH HOUR", 300, 500);
     text("EXIT", 300, 560);
+    text("?", 565, 577);
     popMatrix();
     // Albert initialized at center of screen
     albert = new Albert(width/2, height/2, width, height);
@@ -150,7 +150,7 @@ void draw() {
     textSize(30);
     fill(255, 0, 0);
     textAlign(LEFT);
-    text(collectables.getPtsAccrued(), 10, 30);
+    text(collectables.getPtsAccrued(), 10, 30); //<>//
     textAlign(CENTER);
     popMatrix();
   }
@@ -168,7 +168,7 @@ void draw() {
     fill(255, 0, 0);
     textAlign(LEFT);
     text(collectables.getPtsAccrued(), 10, 30);
-    textAlign(CENTER);
+    textAlign(CENTER); //<>//
     popMatrix();
     //Checks the high score to write to high score file and display new high score message, if applicable.
     if (wCount == 0) {
@@ -184,6 +184,23 @@ void draw() {
       fill(#3ABC1E);
       text("New Rush Hour High Score: " + collectables.getPtsAccrued() + "!", 300, 400);
     }
+  }
+  else if (state == State.HELP) {
+     background(help);
+     fill(250, 250, 255);
+     stroke(232, 128, 42);
+     strokeWeight(3);
+     rect(10, 10, 50, 50);
+     pushMatrix();
+     strokeWeight(5);
+     line(20, 35, 50, 35);
+     line(20, 35, 30, 25);
+     line(20, 35, 30, 45);
+     popMatrix();
+     textSize(38);
+     text("MOVE", 450, 175);
+     text("EXIT GAME", 450, 400);
+     text("PAUSE", 450, 520);
   }
 }
 
@@ -202,6 +219,8 @@ void mousePressed() {
       sounds.changeState(State.MAIN_MENU, State.GAME);
     } else if (mouseX >= 200 && mouseX <= 400 && mouseY >= 520 && mouseY <= 570) {
       exit();
+    } else if (mouseX >= 540 && mouseX <= 590 && mouseY >= 540 && mouseY <= 590) {
+      state = State.HELP;
     }
   } else if (state == State.ESCAPE_MENU) {
     if (mouseX >= 200 && mouseX <= 400 && mouseY >= 400 && mouseY <= 450) {
@@ -214,6 +233,10 @@ void mousePressed() {
       vehicles.clear();
       newEasyHS = false;
       newHardHS = false;
+    }
+  } else if (state == State.HELP) {
+    if (mouseX >= 10 && mouseX <= 60 && mouseY >= 10 && mouseY <= 60) {
+      state = State.MAIN_MENU;
     }
   }
 }
