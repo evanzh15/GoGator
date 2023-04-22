@@ -258,7 +258,7 @@ void keyPressed() {
       else if (keyCode == RIGHT)
         albert.moveRight();
     }
-    if (key == 'w')
+    else if (key == 'w')
       albert.moveUp();
     else if (key == 's')
       albert.moveDown();
@@ -267,9 +267,8 @@ void keyPressed() {
     else if (key == 'd')
       albert.moveRight();
     //Pauses the game
-    else {
-      if (key == TAB)
-        state = State.ESCAPE_MENU;
+    else if (key == TAB) {
+      state = State.ESCAPE_MENU;
       sounds.changeState(State.GAME, State.ESCAPE_MENU);
     }
   }
