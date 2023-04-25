@@ -31,7 +31,7 @@ class Collectables {
   void addCollectable() {
     int type = (int)random(0, 11);
     int cPts = -1;
-    cPts = (int)map(type, 0, 10, 50, 300);s
+    cPts = (int)map(type, 0, 10, 50, 300);
     items.add(new Collectable(type, (int)random(1, 20)*30, (int)random(1, 20)*30, haveBeenSpawned, cPts, millis()));
     onBoard++;
     haveBeenSpawned++;
