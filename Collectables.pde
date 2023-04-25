@@ -17,31 +17,33 @@ class Collectables {
     //Checks for when Albert touches an item
     int check = collision(albert.getX(), albert.getY());
     if (check != -1) {
-      rmCollectable(check);
+      rmCollectable(check, true);
     }
     //Removes collectables from board after a set time period
     for (int i = 0; i < items.size(); i++) {
       Collectable temp = items.get(i);
       image(cSprites[temp.getType()], temp.getX(), temp.getY());
       if (millis() - temp.getSpawnTime() > 10000)
-        rmCollectable(i);
+        rmCollectable(i, false);
     }
   }
   //Creates a new collectable object, with a random type, and drawn at a random position
   void addCollectable() {
     int type = (int)random(0, 11);
     int cPts = -1;
-    cPts = (int)map(type, 0, 10, 50, 300);
+    cPts = (int)map(type, 0, 10, 50, 300);s
     items.add(new Collectable(type, (int)random(1, 20)*30, (int)random(1, 20)*30, haveBeenSpawned, cPts, millis()));
     onBoard++;
     haveBeenSpawned++;
   }
   //Removed collectables when collected or expired
-  void rmCollectable(int rmID) {
+  void rmCollectable(int rmID, boolean collected) {
     for (int i = 0; i < items.size(); i++) {
       Collectable temp = items.get(i);
       if (temp.getID() == rmID) {
-        ptsAccrued += temp.getPts();
+        if (collected) {
+          ptsAccrued += temp.getPts();
+        }
         items.remove(i);
         onBoard--;
         return;

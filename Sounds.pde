@@ -3,6 +3,7 @@ import processing.sound.*;
 class Sounds {
   SoundFile[] sFiles = new SoundFile[8];
   SoundFile currSound;
+  float volume = 0.05;
   Sounds() {
     sFiles[0] = new SoundFile(GoGator.this, "albertDeath1.wav");
     sFiles[1] = new SoundFile(GoGator.this, "backgroundMusic1.wav");
@@ -11,7 +12,7 @@ class Sounds {
     sFiles[4] = new SoundFile(GoGator.this, "collectChomp.wav");
     sFiles[1].loop();
     currSound = sFiles[1];
-    currSound.amp(0.01);
+    currSound.amp(volume);
   }
   //Plays the appropriate sound based on the context of the game
   void changeState(State prevState, State nextState) {
@@ -19,14 +20,14 @@ class Sounds {
       currSound.stop();
       currSound = sFiles[2];
       currSound.loop();
-      currSound.amp(0.01);
+      currSound.amp(volume);
     } else if (prevState == State.GAME && nextState == State.ESCAPE_MENU) {
       currSound.pause();
     } else if (prevState == State.GAME && nextState == State.DEATH) {
       currSound.stop();
       currSound = sFiles[3];
       currSound.play();
-      currSound.amp(0.01);
+      currSound.amp(volume);
     } else if (prevState == State.ESCAPE_MENU && nextState == State.GAME) {
       currSound.play();
     } else if (prevState == State.DEATH && nextState == State.MAIN_MENU ||
@@ -34,12 +35,12 @@ class Sounds {
       currSound.stop();
       currSound = sFiles[1];
       currSound.play();
-      currSound.amp(0.01);
+      currSound.amp(volume);
     }
   }
 
   void playSound(SoundFile sound) {
     sound.play();
-    sound.amp(0.01);
+    sound.amp(volume);
   }
 }
